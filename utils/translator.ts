@@ -150,12 +150,28 @@ const patterns: Record<string, Pattern> = {
     implied: 'Multiple people need to be considered.',
     urgency: 'Medium',
     expected: 'Consider all relevant parties in your decisions.'
+  },
+  'brb': {
+    actual: 'I will be right back.',
+    implied: 'They are stepping away briefly and will return soon.',
+    urgency: 'Low',
+    expected: 'Wait for them to return before continuing.'
+  },
+  'don\'t entertain': {
+    actual: 'Do not engage with or respond to.',
+    implied: 'They want you to ignore or avoid something.',
+    urgency: 'Medium',
+    expected: 'Avoid engaging with the specified person or topic.'
   }
 }
 
 const sensitiveKeywords = [
-  'harassment', 'discrimination', 'suicide', 'self-harm',
-  'mental health crisis', 'abuse', 'violence', 'threat'
+  // Sexual content
+  'sexual harassment', 'sexual assault', 'rape', 'molestation',
+  // Mental health crisis
+  'suicide', 'self-harm', 'kill myself', 'end my life', 'mental health crisis',
+  // Severe abuse/violence
+  'physical abuse', 'domestic violence', 'death threat', 'murder threat'
 ]
 
 const officeKeywords = [
@@ -167,7 +183,8 @@ const officeKeywords = [
   'bandwidth', 'asap', 'urgent', 'priority', 'task', 'work',
   'colleague', 'boss', 'supervisor', 'office', 'corporate',
   'workplace', 'business', 'company', 'look', 'check', 'update',
-  'discuss', 'conversation', 'call', 'request', 'need', 'please'
+  'discuss', 'conversation', 'call', 'request', 'need', 'please',
+  'brb', 'entertain', 'user', 'customer', 'end user', 'client'
 ]
 
 function checkSensitiveContent(text: string): boolean {

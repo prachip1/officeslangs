@@ -13,6 +13,10 @@ const arimo = Arimo({
 export const metadata: Metadata = {
   title: 'Office Slang Translator',
   description: 'Translate corporate language into clear, simple English',
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 }
 
 export default function RootLayout({

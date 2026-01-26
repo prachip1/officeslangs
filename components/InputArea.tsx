@@ -1,5 +1,7 @@
 'use client'
 
+import { FaArrowCircleRight } from 'react-icons/fa'
+
 interface InputAreaProps {
   value: string
   onChange: (value: string) => void
@@ -16,12 +18,12 @@ export default function InputArea({
   isLoading
 }: InputAreaProps) {
   return (
-    <div className="space-y-4">
-      <label htmlFor="office-input" className="block text-sm font-medium" style={{ color: '#333C4D' }}>
-        Enter office language to translate:
+    <div className="space-y-5">
+      <label htmlFor="office-input" className="block text-sm font-semibold tracking-wide" style={{ color: '#333C4D' }}>
+        Enter office language to translate
       </label>
       
-      <div className="relative">
+      <div className="relative group flex justify-center items-center  ">
         <textarea
           id="office-input"
           value={value}
@@ -35,64 +37,82 @@ export default function InputArea({
             }
           }}
           placeholder="Type your office language here..."
-          className="w-full px-4 py-3 pr-12 border rounded-2xl resize-none shadow-sm focus:outline-none focus:ring-2 focus:ring-opacity-20 transition-all"
+          className="w-full px-5 py-4 pr-14 border-2 rounded-2xl resize-none transition-all duration-200 placeholder:text-gray-400 focus:outline-none focus:border-[#333C4D] focus:shadow-lg disabled:opacity-60 disabled:cursor-not-allowed"
           style={{
             backgroundColor: '#FFFFFF',
             color: '#333C4D',
-            borderColor: '#E5E7EB',
-            minHeight: '56px',
-            maxHeight: '200px',
+            borderColor: value.trim() ? '#333C4D' : '#E5E7EB',
+            minHeight: '64px',
+            maxHeight: '240px',
+            fontSize: '15px',
+            lineHeight: '1.6',
           }}
           rows={1}
           disabled={isLoading}
           onInput={(e) => {
             const target = e.target as HTMLTextAreaElement
             target.style.height = 'auto'
-            target.style.height = `${Math.min(target.scrollHeight, 200)}px`
+            target.style.height = `${Math.min(target.scrollHeight, 240)}px`
+          }}
+          onFocus={(e) => {
+            e.target.style.borderColor = '#333C4D'
+          }}
+          onBlur={(e) => {
+            if (!value.trim()) {
+              e.target.style.borderColor = '#E5E7EB'
+            }
           }}
         />
         <button
           onClick={onTranslate}
           disabled={!value.trim() || isLoading}
-          className="absolute right-2 bottom-2 p-2.5 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:scale-105 flex items-center justify-center"
+          className="absolute right-3 bottom-3 rounded-xl transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed shadow-md hover:shadow-lg active:scale-95"
           style={{
             backgroundColor: !value.trim() || isLoading ? '#E5E7EB' : '#333C4D',
             color: '#FFFFFF',
-            width: '36px',
-            height: '36px',
+            width: '40px',
+            height: '40px',
+            padding: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            lineHeight: 0,
           }}
           title="Translate (Ctrl/Cmd + Enter)"
         >
-          <svg 
-            className="w-5 h-5" 
-            fill="none" 
-            stroke="currentColor" 
-            viewBox="0 0 24 24"
-            style={{ overflow: 'visible' }}
-          >
-            <path 
-              strokeLinecap="round" 
-              strokeLinejoin="round" 
-              strokeWidth={2.5} 
-              d="M13 7l5 5m0 0l-5 5m5-5H6" 
+          {isLoading ? (
+            <svg className="animate-spin" fill="none" viewBox="0 0 24 24" style={{ width: '20px', height: '20px', display: 'block' }}>
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          ) : (
+            <FaArrowCircleRight 
+              style={{ 
+                width: '20px',
+                height: '20px',
+                display: 'block',
+              }}
             />
-          </svg>
+          )}
         </button>
       </div>
       
-      <div className="flex gap-3">
+      <div className="flex items-center justify-between">
         <button
           onClick={onClear}
           disabled={!value && !isLoading}
-          className="px-4 py-2 text-sm border rounded-lg font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+          className="px-5 py-2.5 text-sm font-medium border-2 rounded-xl transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40 hover:bg-gray-50 active:scale-95"
           style={{
             backgroundColor: 'transparent',
             color: '#333C4D',
-            borderColor: '#E5E7EB',
+            borderColor: (!value && !isLoading) ? '#E5E7EB' : '#333C4D',
           }}
         >
           Clear
         </button>
+        <span className="text-xs text-gray-400">
+          {value.trim() ? `${value.length} characters` : 'Press Ctrl/Cmd + Enter to translate'}
+        </span>
       </div>
     </div>
   )
