@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Arimo } from 'next/font/google'
 import './globals.css'
+import { Analytics } from "@vercel/analytics/next"
 
 const arimo = Arimo({
   subsets: ['latin'],
@@ -27,6 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={arimo.variable}>
       <body className={arimo.className}>{children}</body>
+      <Analytics />
     </html>
   )
 }
