@@ -12,45 +12,58 @@ interface OutputDisplayProps {
 }
 
 export default function OutputDisplay({ output }: OutputDisplayProps) {
-  const getUrgencyColor = (urgency: string) => {
+  const getUrgencyStyle = (urgency: string) => {
     switch (urgency) {
       case 'High':
-        return 'bg-red-100 text-red-800 border-red-300'
+        return { bg: '#FFE4EC', text: '#C75D7A', border: '#F8B4C4' }
       case 'Medium':
-        return 'bg-yellow-100 text-yellow-800 border-yellow-300'
+        return { bg: '#FFF4E4', text: '#B8860B', border: '#FFE4B5' }
       case 'Low':
-        return 'bg-green-100 text-green-800 border-green-300'
+        return { bg: '#E8F8F2', text: '#2E7D5E', border: '#B5EAD7' }
       default:
-        return 'bg-gray-100 text-gray-800 border-gray-300'
+        return { bg: 'var(--cute-pink-light)', text: 'var(--cute-text)', border: 'var(--cute-pink)' }
     }
   }
 
+  const urgencyStyle = getUrgencyStyle(output.urgencyLevel)
+
+  const section = (label: string, value: string, emoji: string) => (
+    <div
+      className="rounded-2xl p-4"
+      style={{
+        background: 'var(--cute-bg)',
+        border: '1px solid var(--cute-pink-light)',
+      }}
+    >
+      <h3 className="text-sm font-semibold mb-2" style={{ color: 'var(--cute-text-soft)' }}>
+        {emoji} {label}
+      </h3>
+      <p className="text-[15px] leading-relaxed" style={{ color: 'var(--cute-text)' }}>
+        {value}
+      </p>
+    </div>
+  )
+
   return (
-    <div className="border-t pt-6 space-y-4 border-gray-200">
-      <h2 className="text-xl font-semibold mb-4" style={{ color: '#333C4D' }}>Translation:</h2>
-      
+    <div className="pt-6 space-y-4" style={{ borderTop: '1px solid var(--cute-pink-light)' }}>
+      <h2 className="text-xl font-bold mb-4" style={{ color: 'var(--cute-text)' }}>
+        ✨ Your translation
+      </h2>
+
       <div className="space-y-4">
-        <div>
-          <h3 className="text-sm font-medium text-gray-500 mb-1">Actual Meaning:</h3>
-          <p style={{ color: '#333C4D' }}>{output.actualMeaning}</p>
+        {section('Actual meaning', output.actualMeaning, '📖')}
+        {section('What they really mean', output.whatTheyReallyMean, '😏')}
+        <div
+          className="rounded-2xl px-4 py-3 inline-block"
+          style={{
+            background: urgencyStyle.bg,
+            border: `1px solid ${urgencyStyle.border}`,
+            color: urgencyStyle.text,
+          }}
+        >
+          <span className="text-sm font-semibold">⚡ Urgency: {output.urgencyLevel}</span>
         </div>
-        
-        <div>
-          <h3 className="text-sm font-medium text-gray-500 mb-1">What They Really Mean:</h3>
-          <p style={{ color: '#333C4D' }}>{output.whatTheyReallyMean}</p>
-        </div>
-        
-        <div>
-          <h3 className="text-sm font-medium text-gray-500 mb-1">Urgency Level:</h3>
-          <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium border ${getUrgencyColor(output.urgencyLevel)}`}>
-            {output.urgencyLevel}
-          </span>
-        </div>
-        
-        <div>
-          <h3 className="text-sm font-medium text-gray-500 mb-1">What Is Expected From You:</h3>
-          <p style={{ color: '#333C4D' }}>{output.expectedAction}</p>
-        </div>
+        {section('What’s expected from you', output.expectedAction, '👋')}
       </div>
     </div>
   )

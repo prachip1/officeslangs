@@ -1,15 +1,6 @@
 import type { Metadata } from 'next'
-import { Arimo } from 'next/font/google'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
-
-const arimo = Arimo({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700'],
-  style: ['normal', 'italic'],
-  variable: '--font-arimo',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'Office Slang Translator',
@@ -26,8 +17,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={arimo.variable}>
-      <body className={arimo.className}>{children}</body>
+    <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wght@0,200..900;1,200..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>{children}</body>
       <Analytics />
     </html>
   )

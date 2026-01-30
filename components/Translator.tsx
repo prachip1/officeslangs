@@ -53,7 +53,14 @@ export default function Translator() {
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6 space-y-6">
+    <div
+      className="rounded-[28px] p-6 sm:p-8 space-y-6 transition-shadow hover:shadow-[var(--cute-shadow-hover)]"
+      style={{
+        background: 'var(--cute-surface)',
+        boxShadow: 'var(--cute-shadow)',
+        border: '1px solid var(--cute-pink-light)',
+      }}
+    >
       <InputArea
         value={inputText}
         onChange={setInputText}
@@ -61,18 +68,22 @@ export default function Translator() {
         onClear={handleClear}
         isLoading={isLoading}
       />
-      
+
       {error && (
-        <div className="border-t pt-6 border-gray-200">
-          <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <p className="text-yellow-800 text-sm">{error}</p>
+        <div className="pt-6 border-t" style={{ borderColor: 'var(--cute-pink-light)' }}>
+          <div
+            className="rounded-2xl p-4"
+            style={{
+              background: 'rgba(255, 228, 196, 0.5)',
+              border: '1px solid var(--cute-pink-light)',
+            }}
+          >
+            <p className="text-sm" style={{ color: 'var(--cute-text)' }}>🌸 {error}</p>
           </div>
         </div>
       )}
-      
-      {output && (
-        <OutputDisplay output={output} />
-      )}
+
+      {output && <OutputDisplay output={output} />}
     </div>
   )
 }

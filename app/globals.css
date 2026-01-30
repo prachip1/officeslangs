@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --cute-bg: #FFF5F7;
+  --cute-bg-end: #FFF8F0;
+  --cute-surface: #FFFFFF;
+  --cute-pink: #E8A0BF;
+  --cute-pink-light: #F8D7E0;
+  --cute-coral: #FF9EAA;
+  --cute-mint: #B5EAD7;
+  --cute-lavender: #C7CEEA;
+  --cute-text: #5D4E60;
+  --cute-text-soft: #8B7B8E;
+  --cute-shadow: 0 4px 24px rgba(232, 160, 191, 0.15);
+  --cute-shadow-hover: 0 8px 32px rgba(232, 160, 191, 0.22);
+}
+
+@layer base {
+  body {
+    font-family: 'Mona Sans', sans-serif;
+    color: var(--cute-text);
+    -webkit-font-smoothing: antialiased;
+  }
+}
