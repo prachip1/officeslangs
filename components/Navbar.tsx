@@ -7,12 +7,8 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16 sm:h-18">
           <div className="flex items-center gap-2">
             <span
-              className="text-2xl font-bold tracking-tight rounded-2xl px-4 py-2 transition-shadow hover:shadow-lg"
-              style={{
-                color: 'var(--cute-text)',
-                background: 'var(--cute-surface)',
-                boxShadow: 'var(--cute-shadow)',
-              }}
+              className="text-2xl font-bold tracking-tight rounded-2xl px-4 py-2 transition-shadow hover:shadow-[var(--shadow-hover)] text-[var(--text)] bg-[var(--surface)]"
+              style={{ boxShadow: 'var(--shadow)' }}
             >
               😋 officeslangs
             </span>

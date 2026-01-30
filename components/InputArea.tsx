@@ -19,12 +19,8 @@ export default function InputArea({
 }: InputAreaProps) {
   return (
     <div className="space-y-5 leading-tight">
-      <label
-        htmlFor="office-input"
-        className="block text-base font-semibold tracking-wide"
-        style={{ color: 'var(--cute-text)' }}
-      >
-        ✏️ Paste your office speak here
+      <label htmlFor="office-input" className="block text-base font-semibold tracking-wide text-[var(--text)]">
+        Paste your office speak here
       </label>
 
       <div className="relative flex justify-center items-center">
@@ -39,15 +35,13 @@ export default function InputArea({
             }
           }}
           placeholder="e.g. Let's circle back and synergize..."
-          className="w-full px-5 py-4 pr-14 rounded-2xl resize-none transition-all duration-200 placeholder:opacity-70 focus:outline-none focus:ring-2 focus:ring-[var(--cute-pink)] focus:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed"
+          className="w-full px-5 py-4 pr-14 rounded-2xl resize-none transition-all duration-200 bg-white border-2 border-[var(--border)] placeholder:text-[var(--text-muted)] focus:outline-none focus:ring-2 focus:ring-[var(--accent)] focus:ring-offset-2 focus:border-[var(--accent)] disabled:opacity-60 disabled:cursor-not-allowed text-[var(--text)]"
           style={{
-            backgroundColor: 'var(--cute-bg)',
-            color: 'var(--cute-text)',
-            border: `2px solid ${value.trim() ? 'var(--cute-pink)' : 'var(--cute-pink-light)'}`,
             minHeight: '72px',
             maxHeight: '240px',
             fontSize: '15px',
             lineHeight: '1.6',
+            borderColor: value.trim() ? 'var(--text-muted)' : undefined,
           }}
           rows={1}
           disabled={isLoading}
@@ -92,7 +86,7 @@ export default function InputArea({
         >
           Clear
         </button>
-        <span className="text-xs" style={{ color: 'var(--cute-text-soft)' }}>
+        <span className="text-xs text-[var(--text-muted)]">
           {value.trim() ? `${value.length} characters` : 'Ctrl/Cmd + Enter to translate'}
         </span>
       </div>
