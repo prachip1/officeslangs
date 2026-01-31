@@ -65,3 +65,28 @@ The app uses a **hybrid approach**:
 - ✅ Office-related content validation
 - ✅ Urgency level detection (Low/Medium/High)
 - ✅ Error handling and loading states
+
+## Indexing & Google Search Console
+
+The app is set up for indexing and Search Console:
+
+- **Metadata**: Title, description, keywords, Open Graph, Twitter cards
+- **robots.txt**: Served at `/robots.txt` (allows crawlers, disallows `/api/`, points to sitemap)
+- **Sitemap**: Served at `/sitemap.xml` for Search Console
+- **JSON-LD**: WebApplication structured data for rich results
+- **Verification**: Optional meta tag via `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION`
+
+### How to index on Google
+
+1. Deploy to Vercel (e.g. `officeslangs.vercel.app`).
+2. Go to [Google Search Console](https://search.google.com/search-console).
+3. Add a property: **URL prefix** → `https://officeslangs.vercel.app` (or your custom domain).
+4. Verify ownership:
+   - Choose **HTML tag**.
+   - Copy the `content` value (e.g. `abc123xyz`).
+   - In Vercel: Project → Settings → Environment Variables → add:
+     - `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` = that content value
+   - Redeploy, then click **Verify** in Search Console.
+5. Submit the sitemap: **Sitemaps** → add `https://officeslangs.vercel.app/sitemap.xml` → Submit.
+
+Optional: set `NEXT_PUBLIC_SITE_URL` in Vercel to your exact live URL (e.g. custom domain) so canonical URLs and sitemap use it.
